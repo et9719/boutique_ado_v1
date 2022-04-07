@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import OrderForm
 
 def checkout(request):
+    ''' Add description '''
     bag = request.session.get('bag', {})
     if not bag:
         message.error(request, "There's nothing in your bag at the moment")
@@ -12,7 +13,9 @@ def checkout(request):
     order_form = OrderForm()
     template = 'checkout/checkout.html'
     context = {
-        'order_form': order_form, 
+        'order_form': order_form,
+        'stripe_public_key': 'pk_test_51KlwZ9BCsbtyKtROycXPJsENXGhAb5ZBxzQFOryMRq3JdBgAEmUXEaxKGTVnHyzOfRUNqqsBTXqvDP4QBVRFVkCC00ZQCpth9x',
+        'client_secret': 'test client secret',
     }
 
     return render(request, template, context)
